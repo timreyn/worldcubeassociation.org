@@ -899,7 +899,17 @@ class User < ApplicationRecord
         },
         "roles" => { "type" => "array", "items" => { "type" => "string" } },
         "registration" => Registration.wcif_json_schema,
-        "assignments" => { "type" => "object" }, # TODO: expand on this,
+        "assignments" => {
+          "type" => "array",
+          "items" => {
+            "type" => "object",
+            "properties" => {
+              "activityId" => "string",
+              "stationNumber" => "integer",
+              "assignmentCode" => "string",
+            },
+          },
+        },
         "personalBests" => { "type" => "array", "items" => PersonalBest.wcif_json_schema },
       },
     }
