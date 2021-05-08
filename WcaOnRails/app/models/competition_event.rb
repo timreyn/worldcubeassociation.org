@@ -14,6 +14,9 @@ class CompetitionEvent < ApplicationRecord
            as: "fee",
            with_model_currency: :currency_code
 
+  serialize :qualification, Qualification
+  validates_associated :qualification
+
   validate do
     remaining_rounds = rounds.reject(&:marked_for_destruction?)
     numbers = remaining_rounds.map(&:number).sort
@@ -39,6 +42,7 @@ class CompetitionEvent < ApplicationRecord
       "id" => self.event.id,
       "rounds" => self.rounds.map(&:to_wcif),
       "extensions" => wcif_extensions.map(&:to_wcif),
+      "qualification" => qualification&.to_wcif,
     }
   end
 
@@ -55,6 +59,8 @@ class CompetitionEvent < ApplicationRecord
       WcifExtension.update_wcif_extensions!(round, wcif_round["extensions"]) if wcif_round["extensions"]
     end
     WcifExtension.update_wcif_extensions!(self, wcif["extensions"]) if wcif["extensions"]
+    self.qualification = Qualification.load(wcif["qualification"])
+    self.save
   end
 
   def self.wcif_json_schema
@@ -64,7 +70,7 @@ class CompetitionEvent < ApplicationRecord
         "id" => { "type" => "string" },
         "rounds" => { "type" => ["array", "null"], "items" => Round.wcif_json_schema },
         "competitorLimit" => { "type" => ["integer", "null"] },
-        "qualification" => { "type" => ["object", "null"] }, # TODO: expand on this
+        "qualification" => Qualification.wcif_json_schema,
         "extensions" => { "type" => "array", "items" => WcifExtension.wcif_json_schema },
       },
     }

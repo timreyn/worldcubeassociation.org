@@ -177,6 +177,17 @@ en:
       across_rounds: "%{time} total for %{rounds}"
     333fm: "1 hour"
     333mbf: "10:00.00 per cube, up to 60:00.00"
+  #context: Words used to describe qualification limits.
+  qualification:
+    ranking: "Top %{ranking} competitors"
+    single:
+      time: "Single solve under %{time}"
+      moves: "Single solve under %{moves} moves"
+      points: "Single solve under %{points} points"
+    average:
+      time: "Average under %{time}"
+      moves: "Average under %{moves} moves"
+      points: "Average under %{points} points"
   #context: Common word used in multiple places on the website
   common:
     world: "World"
