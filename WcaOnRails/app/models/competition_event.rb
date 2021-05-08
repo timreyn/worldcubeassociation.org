@@ -37,6 +37,10 @@ class CompetitionEvent < ApplicationRecord
     Event.c_find(event_id)
   end
 
+  def qualification_to_s
+    qualification&.to_s(self)
+  end
+
   def to_wcif
     {
       "id" => self.event.id,

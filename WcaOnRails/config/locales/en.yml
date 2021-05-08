@@ -179,7 +179,7 @@ en:
     333mbf: "10:00.00 per cube, up to 60:00.00"
   #context: Words used to describe qualification limits.
   qualification:
-    ranking: "Top %{ranking} competitors"
+    ranking: "Top %{ranking} registered competitors"
     single:
       time: "Single solve under %{time}"
       moves: "Single solve under %{moves} moves"
@@ -1530,10 +1530,14 @@ en:
         cumulative_across_rounds_html: "A %{cumulative_time_limit} may be enforced across rounds (see %{guideline_link})."
         cutoff_html: "The result to beat to proceed to the second phase of a cutoff round (see %{regulation_link})."
         format_html: "The format describes how to determine the ranking of competitors based on their results. The list of allowed formats per event is described in %{link_to_9b}. See %{link_to_9f} for a description of each format."
+        qualification_html: "Qualification times must be set in other WCA competitions in order to compete."
+        qualification_all_events_html: "The deadline for setting qualification times is <b>%{date}</b>."
+        qualification_some_events_html: "The deadline for setting qualification times in %{events} is <b>%{date}</b>."
       format: "Format"
       time_limit: "Time limit"
       cutoff: "Cutoff"
       proceed: "Proceed"
+      qualification: "Qualification"
     #context: competition's schedule tab
     schedule:
       #context: when selecting the kind of schedule to display
