@@ -97,11 +97,11 @@ class SingleQualification < Qualification
   end
 
   def to_s(event)
-    if event.timed_event?
+    if event.event.timed_event?
       I18n.t("qualification.single.time", time: SolveTime.centiseconds_to_clock_format(single))
-    elsif event.fewest_moves?
+    elsif event.event.fewest_moves?
       I18n.t("qualification.single.moves", moves: single)
-    elsif event.multiple_blindfolded?
+    elsif event.event.multiple_blindfolded?
       I18n.t("qualification.single.points", points: SolveTime.multibld_attempt_to_points(single))
     end
   end
@@ -127,12 +127,12 @@ class AverageQualification < Qualification
     self.average = json_obj['average']
   end
 
-  def to_s(round, short: false)
-    if event.timed_event?
+  def to_s(event, short: false)
+    if event.event.timed_event?
       I18n.t("qualification.average.time", time: SolveTime.centiseconds_to_clock_format(average))
-    elsif event.fewest_moves?
+    elsif event.event.fewest_moves?
       I18n.t("qualification.average.moves", moves: average)
-    elsif event.multiple_blindfolded?
+    elsif event.event.multiple_blindfolded?
       I18n.t("qualification.average.points", points: SolveTime.multibld_attempt_to_points(average))
     end
   end
