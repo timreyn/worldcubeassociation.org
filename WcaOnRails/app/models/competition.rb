@@ -182,7 +182,7 @@ class Competition < ApplicationRecord
            allow_nil: true,
            with_model_currency: :currency_code
   validates :early_puzzle_submission_reason, presence: true, if: :early_puzzle_submission?
-  validates :qualification_results_reason, presence: true, if: :qualification_results?
+  validates :qualification_results_reason, presence: true, if: :uses_qualification?
   validates :event_restrictions_reason, presence: true, if: :event_restrictions?
   validates_inclusion_of :main_event_id, in: ->(comp) { [nil].concat(comp.persisted_events_id) }
 
