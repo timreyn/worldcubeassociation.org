@@ -80,6 +80,7 @@ RSpec.describe "Competition WCIF" do
                 "extensions" => [],
               },
             ],
+            "qualification" => nil,
           },
           {
             "id" => "444",
@@ -99,6 +100,7 @@ RSpec.describe "Competition WCIF" do
                 "extensions" => [],
               },
             ],
+            "qualification" => nil,
           },
           {
             "id" => "333fm",
@@ -115,6 +117,7 @@ RSpec.describe "Competition WCIF" do
                 "extensions" => [],
               },
             ],
+            "qualification" => nil,
           },
           {
             "id" => "333mbf",
@@ -139,6 +142,7 @@ RSpec.describe "Competition WCIF" do
                 ],
               },
             ],
+            "qualification" => nil,
           },
         ],
         "schedule" => {
@@ -302,6 +306,7 @@ RSpec.describe "Competition WCIF" do
             "extensions" => [],
           },
         ],
+        "qualification" => nil,
       }
       # Add 5x5x5 after 4x4x4 to match the expected order.
       wcif["events"].insert(2, wcif555)
