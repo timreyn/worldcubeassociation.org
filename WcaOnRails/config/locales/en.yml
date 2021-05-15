@@ -1321,6 +1321,7 @@ en:
       no_on_the_spot_registration: "No on the spot registrations will be accepted."
       guests_pay: "Spectators can attend paying an entry fee of %{guests_base_fee}."
       guests_free: "Spectators can attend for free."
+      require_qualification: "Competitors may only register for events that they are already qualified for."
       #context: The 'link_here' variable is replaced by a link to show the requirements, with the text "here"
       click_to_display_requirements_html: "This competition is over, click %{link_here} to display the registration requirements it used."
       hide_requirements: "Hide registration requirements."
