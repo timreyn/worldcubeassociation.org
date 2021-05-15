@@ -323,6 +323,7 @@ en:
         event_restrictions: "I would like to restrict competitors from registering for specific combinations of events"
         event_restrictions_reason: "Reason and details for event restrictions"
         main_event_id: "Main event"
+        allow_registration_without_qualification: "Events with Qualification"
       #context: a registration to a competition
       registration:
         guests: "Guests"
@@ -634,6 +635,9 @@ en:
         on_the_spot_registration:
           "true": "On the spot registrations will be accepted"
           "false": "On the spot registrations WILL NOT be accepted"
+        allow_registration_without_qualification:
+          "true": "Competitors will be allowed to register for events they're not qualified for (I'll remove them later)"
+          "false": "Competitors MUST be qualified to register for an event"
   mail_form:
     #context: This key is used as a label for contact form attributes
     attributes:
