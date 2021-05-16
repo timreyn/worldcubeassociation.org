@@ -41,6 +41,10 @@ class CompetitionEvent < ApplicationRecord
     qualification&.to_s(self)
   end
 
+  def can_register(user)
+    qualification.nil? || qualification.met?(user, event_id)
+  end
+
   def to_wcif
     {
       "id" => self.event.id,

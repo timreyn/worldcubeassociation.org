@@ -1177,6 +1177,7 @@ en:
     entry_fees_fully_paid: "You have paid %{paid}, which fully covers the registration fees."
     will_pay_here: "You will pay them here after submitting your registration"
     wont_pay_here: "Please check competition's information for instruction about how to pay"
+    not_qualified: "Not qualified"
     refund_form:
       hints:
         refund_amount: "The amount to refund to the competitor, can be any value up to the amount already paid."
