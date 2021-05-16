@@ -15,7 +15,7 @@ class Qualification
   end
 
   def met?(user, event_id)
-    user.person && qualifying_results(user.person.results.in_event(event_id).before(self.when_time)).any?
+    user.person && qualifying_results(user.person.results.in_event(event_id).no_later_than(self.when_time)).any?
   end
 
   def self.wcif_type_to_class
