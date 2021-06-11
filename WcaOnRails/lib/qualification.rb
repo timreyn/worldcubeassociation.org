@@ -27,7 +27,8 @@ class Qualification
       out = self.wcif_type_to_class[wcif_type].new(json_obj)
       begin
         out.when_date = Date.iso8601(json_obj['whenDate'])
-      rescue ArgumentError => e
+      rescue ArgumentError
+        nil
       end
       out
     end
@@ -76,8 +77,8 @@ class RankingQualification < Qualification
 end
 
 class SingleQualification < Qualification
-  attr_accessor :attemptResult
-  validates :attemptResult, numericality: { only_integer: true, greater_than: 0 }
+  attr_accessor :attempt_result
+  validates :attempt_result, numericality: { only_integer: true, greater_than: 0 }
 
   def self.wcif_type
     "single"
@@ -87,28 +88,28 @@ class SingleQualification < Qualification
     {
       "type" => self.class.wcif_type,
       "whenDate" => @when_date&.strftime("%Y-%m-%d"),
-      "attemptResult" => attemptResult,
+      "attemptResult" => attempt_result,
     }
   end
 
   def initialize(json_obj)
-    self.attemptResult = json_obj['attemptResult']
+    self.attempt_result = json_obj['attemptResult']
   end
 
   def to_s(event)
     if event.event.timed_event?
-      I18n.t("qualification.single.time", time: SolveTime.centiseconds_to_clock_format(attemptResult))
+      I18n.t("qualification.single.time", time: SolveTime.centiseconds_to_clock_format(attempt_result))
     elsif event.event.fewest_moves?
-      I18n.t("qualification.single.moves", moves: attemptResult)
+      I18n.t("qualification.single.moves", moves: attempt_result)
     elsif event.event.multiple_blindfolded?
-      I18n.t("qualification.single.points", points: SolveTime.multibld_attempt_to_points(attemptResult))
+      I18n.t("qualification.single.points", points: SolveTime.multibld_attempt_to_points(attempt_result))
     end
   end
 end
 
 class AverageQualification < Qualification
-  attr_accessor :attemptResult
-  validates :attemptResult, numericality: { only_integer: true, greater_than: 0 }
+  attr_accessor :attempt_result
+  validates :attempt_result, numericality: { only_integer: true, greater_than: 0 }
 
   def self.wcif_type
     "average"
@@ -118,21 +119,21 @@ class AverageQualification < Qualification
     {
       "type" => self.class.wcif_type,
       "whenDate" => @when_date&.strftime("%Y-%m-%d"),
-      "attemptResult" => attemptResult,
+      "attemptResult" => attempt_result,
     }
   end
 
   def initialize(json_obj)
-    self.attemptResult = json_obj['attemptResult']
+    self.attempt_result = json_obj['attemptResult']
   end
 
   def to_s(event, short: false)
     if event.event.timed_event?
-      I18n.t("qualification.average.time", time: SolveTime.centiseconds_to_clock_format(attemptResult))
+      I18n.t("qualification.average.time", time: SolveTime.centiseconds_to_clock_format(attempt_result))
     elsif event.event.fewest_moves?
-      I18n.t("qualification.average.moves", moves: attemptResult)
+      I18n.t("qualification.average.moves", moves: attempt_result)
     elsif event.event.multiple_blindfolded?
-      I18n.t("qualification.average.points", points: SolveTime.multibld_attempt_to_points(attemptResult))
+      I18n.t("qualification.average.points", points: SolveTime.multibld_attempt_to_points(attempt_result))
     end
   end
 end

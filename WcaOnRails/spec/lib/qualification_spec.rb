@@ -5,7 +5,7 @@ RSpec.describe Qualification do
     it "requires ranking" do
       input = {
         'type' => 'ranking',
-        'whenDate' => '2021-06-01'
+        'whenDate' => '2021-06-01',
       }
       model = Qualification.load(input)
       expect(model).to be_invalid
@@ -14,7 +14,7 @@ RSpec.describe Qualification do
     it "requires date" do
       input = {
         'type' => 'ranking',
-        'ranking' => 50
+        'ranking' => 50,
       }
       model = Qualification.load(input)
       expect(model).to be_invalid
@@ -24,7 +24,7 @@ RSpec.describe Qualification do
       input = {
         'type' => 'ranking',
         'whenDate' => '2021-06-01',
-        'ranking' => 50
+        'ranking' => 50,
       }
       model = Qualification.load(input)
       expect(model).to be_valid
@@ -35,7 +35,7 @@ RSpec.describe Qualification do
     it "requires single" do
       input = {
         'type' => 'single',
-        'whenDate' => '2021-06-01'
+        'whenDate' => '2021-06-01',
       }
       model = Qualification.load(input)
       expect(model).to be_invalid
@@ -44,7 +44,7 @@ RSpec.describe Qualification do
     it "requires date" do
       input = {
         'type' => 'single',
-        'attemptResult' => 1000
+        'attemptResult' => 1000,
       }
       model = Qualification.load(input)
       expect(model).to be_invalid
@@ -54,7 +54,7 @@ RSpec.describe Qualification do
       input = {
         'type' => 'single',
         'whenDate' => '2021-06-01',
-        'attemptResult' => 1000
+        'attemptResult' => 1000,
       }
       model = Qualification.load(input)
       expect(model).to be_valid
@@ -65,7 +65,7 @@ RSpec.describe Qualification do
     it "requires average" do
       input = {
         'type' => 'average',
-        'whenDate' => '2021-06-01'
+        'whenDate' => '2021-06-01',
       }
       model = Qualification.load(input)
       expect(model).to be_invalid
@@ -74,7 +74,7 @@ RSpec.describe Qualification do
     it "requires date" do
       input = {
         'type' => 'average',
-        'attemptResult' => 1000
+        'attemptResult' => 1000,
       }
       model = Qualification.load(input)
       expect(model).to be_invalid
@@ -84,7 +84,7 @@ RSpec.describe Qualification do
       input = {
         'type' => 'average',
         'whenDate' => '2021-06-01',
-        'attemptResult' => 1000
+        'attemptResult' => 1000,
       }
       model = Qualification.load(input)
       expect(model).to be_valid
