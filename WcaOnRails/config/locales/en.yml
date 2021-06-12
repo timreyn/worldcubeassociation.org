@@ -323,6 +323,7 @@ en:
         event_restrictions: "I would like to restrict competitors from registering for specific combinations of events"
         event_restrictions_reason: "Reason and details for event restrictions"
         main_event_id: "Main event"
+        allow_registration_without_qualification: "Events with Qualification"
       #context: a registration to a competition
       registration:
         guests: "Guests"
@@ -634,6 +635,9 @@ en:
         on_the_spot_registration:
           "true": "On the spot registrations will be accepted"
           "false": "On the spot registrations WILL NOT be accepted"
+        allow_registration_without_qualification:
+          "true": "Competitors will be allowed to register for events they're not qualified for (I'll remove them later)"
+          "false": "Competitors MUST be qualified to register for an event"
   mail_form:
     #context: This key is used as a label for contact form attributes
     attributes:
@@ -1173,6 +1177,7 @@ en:
     entry_fees_fully_paid: "You have paid %{paid}, which fully covers the registration fees."
     will_pay_here: "You will pay them here after submitting your registration"
     wont_pay_here: "Please check competition's information for instruction about how to pay"
+    not_qualified: "Not qualified"
     refund_form:
       hints:
         refund_amount: "The amount to refund to the competitor, can be any value up to the amount already paid."
@@ -1317,6 +1322,7 @@ en:
       no_on_the_spot_registration: "No on the spot registrations will be accepted."
       guests_pay: "Spectators can attend paying an entry fee of %{guests_base_fee}."
       guests_free: "Spectators can attend for free."
+      require_qualification: "Competitors may only register for events that they are already qualified for."
       #context: The 'link_here' variable is replaced by a link to show the requirements, with the text "here"
       click_to_display_requirements_html: "This competition is over, click %{link_here} to display the registration requirements it used."
       hide_requirements: "Hide registration requirements."

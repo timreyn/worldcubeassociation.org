@@ -10,6 +10,8 @@ FactoryBot.define do
     password { "wca" }
     password_confirmation { "wca" }
 
+    association :person, factory: :person
+
     transient do
       preferred_event_ids { [] }
     end

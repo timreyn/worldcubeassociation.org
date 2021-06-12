@@ -14,6 +14,10 @@ class Qualification
     self.to_wcif.hash
   end
 
+  def met?(user, event_id)
+    user.person && qualifying_results(user.person.results.in_event(event_id).no_later_than(self.when_time)).any?
+  end
+
   def self.wcif_type_to_class
     @@wcif_type_to_class ||= Qualification.subclasses.map { |cls| [cls.wcif_type, cls] }.to_h
   end
@@ -59,6 +63,10 @@ class RankingQualification < Qualification
     "ranking"
   end
 
+  def qualifying_results(r)
+    r.succeeded
+  end
+
   def to_wcif
     {
       "type" => self.class.wcif_type,
@@ -82,6 +90,10 @@ class SingleQualification < Qualification
 
   def self.wcif_type
     "single"
+  end
+
+  def qualifying_results(r)
+    r.single_better_than(single)
   end
 
   def to_wcif
@@ -113,6 +125,10 @@ class AverageQualification < Qualification
 
   def self.wcif_type
     "average"
+  end
+
+  def qualifying_results(r)
+    r.average_better_than(average)
   end
 
   def to_wcif

@@ -243,4 +243,8 @@ class Registration < ApplicationRecord
       event_ids: events.map(&:id),
     }
   end
+
+  before_save do
+    self.registration_competition_events = self.registration_competition_events.select { |e| e.competition_event.can_register?(self.user) }
+  end
 end
