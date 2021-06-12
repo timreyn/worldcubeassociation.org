@@ -12,7 +12,7 @@ fi
 /home/cubing/worldcubeassociation.org/scripts/acces.sh \
   --gh-token <%= @secrets['GITHUB_LIST_MEMBERS_ACCESS_TOKEN'] %> \
   --gh-org thewca \
-  --gh-team "Software Team" \
+  --gh-team "<%= node.chef_environment == "production" ? "WST Admin" : "Software Team" %>" \
   --keyfile /home/cubing/.ssh/authorized_keys
 
 # Add keys used by Travis for deployment.

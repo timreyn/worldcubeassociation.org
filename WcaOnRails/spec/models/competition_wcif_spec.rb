@@ -437,6 +437,19 @@ RSpec.describe "Competition WCIF" do
 
       expect(competition.to_wcif["events"]).to eq(wcif["events"])
     end
+
+    it "can set event qualifications" do
+      wcif_333_event = wcif["events"].find { |e| e["id"] == "333" }
+      wcif_333_event["qualification"] = {
+        "type" => "average",
+        "whenDate" => "2021-07-01",
+        "attemptResult" => 6000,
+      }
+
+      competition.set_wcif_events!(wcif["events"], delegate)
+
+      expect(competition.to_wcif["events"]).to eq(wcif["events"])
+    end
   end
 
   describe "#set_wcif_schedule!" do

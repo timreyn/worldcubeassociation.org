@@ -1,0 +1,38 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/WcaOnRails"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 10
+  ignore:
+  # https://github.com/thewca/worldcubeassociation.org/pull/4456
+  - dependency-name: envied
+    versions:
+    - "> 0.9.1"
+  # compatibility with Ruby 2.6
+  - dependency-name: rails
+    versions:
+    - "> 5.2"
+  # compatibility with Ruby 2.6
+  - dependency-name: rubocop
+    versions:
+      - "> 0.81"
+  # https://github.com/thewca/worldcubeassociation.org/pull/3644
+  - dependency-name: seedbank
+    versions:
+    - 0.5.0
+- package-ecosystem: npm
+  directory: "/WcaOnRails"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 10
+  ignore:
+  # We plan on migrating to Fomantic anyways, so no need to bother upgrading bootstrap.
+  - dependency-name: react-bootstrap
+    versions:
+    - ">= 1.0.0"
+  # We're staying on Webpack 4 for the time being.
+  - dependency-name: webpack
+    versions:
+    - ">= 5.0.0"

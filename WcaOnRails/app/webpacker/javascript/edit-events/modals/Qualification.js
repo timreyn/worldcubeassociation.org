@@ -30,17 +30,17 @@ function eventQualificationToString(wcifEvent, qualification, { short } = {}) {
     return "-";
   }
   let dateString = "-";
-  if (qualification.when) {
-    let when = moment(qualification.when).toDate();
-    dateString = when.toISOString().substring(0, 10);
+  if (qualification.whenDate) {
+    let whenDate = moment(qualification.whenDate).toDate();
+    dateString = whenDate.toISOString().substring(0, 10);
   }
   switch (qualification.type) {
     case "ranking":
       return `Top ${qualification.ranking} competitors by ${dateString}`;
     case "single":
-      return `Single of ${attemptResultToString(qualification.single, wcifEvent.id, short)} by ${dateString}`;
+      return `Single of ${attemptResultToString(qualification.attemptResult, wcifEvent.id, short)} by ${dateString}`;
     case "average":
-      return `Average of ${attemptResultToString(qualification.average, wcifEvent.id, short)} by ${dateString}`;
+      return `Average of ${attemptResultToString(qualification.attemptResult, wcifEvent.id, short)} by ${dateString}`;
   }
 }
 
@@ -52,7 +52,7 @@ export default {
     return <span>{eventQualificationToString(wcifEvent, wcifEvent.qualification, { short: true })}</span>;
   },
   Input({ value: qualification, onChange, autoFocus, wcifEvent }) {
-    let qualificationTypeInput, rankingInput, singleInput, averageInput, whenInput;
+    let qualificationTypeInput, rankingInput, singleInput, averageInput, whenDateInput;
 
     let onChangeAggregator = () => {
       let type = qualificationTypeInput.value;
@@ -61,17 +61,17 @@ export default {
         newQualification = { type };
         if (qualification) {
           // Copy the deadline from the previous Qualification, or default to today.
-          newQualification.when = qualification.when || moment(new Date()).format("YYYY-MM-DD");
+          newQualification.whenDate = qualification.whenDate || moment(new Date()).format("YYYY-MM-DD");
         }
         switch (type) {
           case "ranking":
             newQualification.ranking = rankingInput ? parseInt(rankingInput.value) : 0;
             break;
           case "single":
-            newQualification.single = singleInput ? parseInt(singleInput.value) : 0;
+            newQualification.attemptResult = singleInput ? parseInt(singleInput.value) : 0;
             break;
           case "average":
-            newQualification.average = averageInput ? parseInt(averageInput.value) : 0;
+            newQualification.attemptResult = averageInput ? parseInt(averageInput.value) : 0;
             break;
           default:
             throw new Error(`Unrecognized value ${type}`);
@@ -83,7 +83,7 @@ export default {
 
     let onDateSelect = (date) => {
       let newQualification = qualification;
-      newQualification.when = moment(date).format("YYYY-MM-DD");
+      newQualification.whenDate = moment(date).format("YYYY-MM-DD");
       onChange(newQualification);
     }
 
@@ -108,7 +108,7 @@ export default {
         qualificationInput = (
           <AttemptResultInput eventId={wcifEvent.id}
                               id="qualification-single-value"
-                              value={qualification.single}
+                              value={qualification.attemptResult}
                               onChange={onChangeAggregator}
                               ref={c => singleInput = c} />
         );
@@ -118,29 +118,29 @@ export default {
         qualificationInput = (
           <AttemptResultInput eventId={wcifEvent.id}
                               id="qualification-average-value"
-                              value={qualification.average}
+                              value={qualification.attemptResult}
                               onChange={onChangeAggregator}
                               ref={c => averageInput = c} />
         );
         break;
     }
 
-    let whenBlock = qualificationInput ? (
+    let whenDateBlock = qualificationInput ? (
       <div className="form-group">
-        <label htmlFor="when-input" className="col-sm-3 control-label">
+        <label htmlFor="whenDate-input" className="col-sm-3 control-label">
           Qualification Deadline
         </label>
         <div className="col-sm-9">
-          <DatePicker name="when"
+          <DatePicker name="whenDate"
                       onChange={date => onDateSelect(date)}
                       className="form-control"
-                      id="when-input"
-                      selected={moment(qualification.when).toDate()}
-                      ref={c => whenInput = c}/>
+                      id="whenDate-input"
+                      selected={moment(qualification.whenDate).toDate()}
+                      ref={c => whenDateInput = c}/>
         </div>
       </div>
     ) : null;
-        
+
     return (
       <div>
         <div className="form-group">
@@ -171,7 +171,7 @@ export default {
             {qualificationInput}
           </div>
         </div>
-        {whenBlock}
+        {whenDateBlock}
         {helpBlock}
       </div>
     );
